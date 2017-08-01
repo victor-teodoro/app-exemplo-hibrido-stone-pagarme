@@ -105,6 +105,7 @@ public class DisplayProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(DisplayProductActivity.this, "Compra registrada com sucesso!\nDirija-se ao caixa mais próximo.", Toast.LENGTH_LONG).show();
+            }
         });
 
         // Paga com cartão tokenizado

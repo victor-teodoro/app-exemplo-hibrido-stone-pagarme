@@ -12,13 +12,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/stoneco_light_android"/>
+        android:src="@drawable/panvel_logo"/>
     <Button
         android:id="@+id/connect_pagarme"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Conectar via Pagar.me"
-        android:background="#003920"
+        android:background="#1d2675"
         android:textColor="#FFF"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -28,7 +28,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Conectar via Stone"
-        android:background="#003920"
+        android:background="#1d2675"
         android:textColor="#FFF"
         android:layout_above="@+id/connect_pagarme"
         android:layout_alignParentLeft="true"
@@ -38,7 +38,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Pagar com cartão tokenizado"
-        android:background="#003920"
+        android:background="#1d2675"
         android:textColor="#FFF"
         android:layout_above="@+id/connect_stone"
         android:layout_alignParentLeft="true"
