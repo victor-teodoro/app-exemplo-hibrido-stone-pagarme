@@ -42,10 +42,11 @@ import me.pagar.mposandroid.Mpos;
 import me.pagar.mposandroid.MposListener;
 import me.pagar.mposandroid.MposPaymentResult;
 import me.pagar.mposandroid.PaymentMethod;
-import stone.utils.GlobalInformations;
+
+import static com.example.newpc.qrcode.R.id.view;
 
 public class DisplayProductActivity extends AppCompatActivity {
-    private Button payMposBtn, payCardBtn;
+    private Button payMposBtn, payCardBtn, payOnCashier;
     private Button connection_btn;
     private ImageView product_image;
     private TextView product_name;
@@ -71,6 +72,7 @@ public class DisplayProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_product);
         payMposBtn = (Button) findViewById(R.id.pay_mpos_btn);
         payCardBtn = (Button) findViewById(R.id.pay_card_btn);
+        payOnCashier = (Button) findViewById(R.id.pay_on_cashier);
         product_image = (ImageView) findViewById(R.id.product_image);
         product_name = (TextView) findViewById(R.id.product_name);
         product_amount = (TextView) findViewById(R.id.product_amount);
@@ -97,6 +99,13 @@ public class DisplayProductActivity extends AppCompatActivity {
 
         // Baixa as infos do produto
         getAPI(productURL);
+
+        // Paga no caixa
+        payOnCashier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DisplayProductActivity.this, "Compra registrada com sucesso!\nDirija-se ao caixa mais próximo.", Toast.LENGTH_LONG).show();
+        });
 
         // Paga com cartão tokenizado
         payCardBtn.setOnClickListener(new View.OnClickListener() {

@@ -12,13 +12,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/stoneco_light_android"/>
+        android:src="@drawable/panvel_logo"/>
     <Button
         android:id="@+id/scan"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Adicionar Produto"
-        android:background="#003920"
+        android:background="#1d2675"
         android:textColor="#FFF"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

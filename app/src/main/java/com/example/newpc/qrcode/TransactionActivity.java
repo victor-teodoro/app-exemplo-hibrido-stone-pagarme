@@ -306,6 +306,8 @@ public class TransactionActivity extends AppCompatActivity {
                         jsonBody.put("metadata", metadata);
                         jsonBody.put("split_rules", splitRules);
 
+                        Log.d("Pagar.me", jsonBody.toString());
+
                         // Faz o POST no Pagar.me
                         postApiMpos(mpos);
                     } catch (JSONException e) {
