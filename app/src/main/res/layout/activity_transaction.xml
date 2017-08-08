@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:background="#003920"
+        android:background="#1d2675"
         android:textColor="#FFF"
         android:text="@string/transaction_send_button" />
 

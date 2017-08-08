@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/panvel_logo"/>
+        android:src="@drawable/hirota_express_logo"/>
     <Button
         android:id="@+id/connect_pagarme"
         android:layout_width="fill_parent"
