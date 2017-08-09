@@ -126,6 +126,8 @@ public class DisplayProductActivity extends AppCompatActivity {
                     String apiKey = productInfo.getString("api_key");
                     String softDescriptor = productInfo.getString("soft_descriptor");
                     String planId = productInfo.getString("plan_id");
+                    JSONObject customer = productInfo.getJSONObject("customer");
+                    Log.d("Pagar.me", planId);
 
                     // Inicializa o JSON da transação
                     jsonBody = new JSONObject();
@@ -133,6 +135,7 @@ public class DisplayProductActivity extends AppCompatActivity {
                     jsonBody.put("card_id", cardId);
                     jsonBody.put("amount", amount);
                     jsonBody.put("plan_id", planId);
+                    jsonBody.put("customer", customer);
                     jsonBody.put("soft_descriptor", softDescriptor);
                     jsonBody.put("metadata", metadata);
                     jsonBody.put("split_rules", splitRules);
