@@ -60,7 +60,7 @@ public class DisplayProductActivity extends AppCompatActivity {
     boolean isPagarme = false;
 
     public String device;
-    private String urlString = "https://api.pagar.me/1/transactions";
+    private String urlString = "https://api.pagar.me/1/subscriptions";
     public JSONObject jsonBody;
     private ProgressBar spinner;
 
@@ -125,12 +125,14 @@ public class DisplayProductActivity extends AppCompatActivity {
                     JSONObject metadata = productInfo.getJSONObject("metadata");
                     String apiKey = productInfo.getString("api_key");
                     String softDescriptor = productInfo.getString("soft_descriptor");
+                    String planId = productInfo.getString("plan_id");
 
                     // Inicializa o JSON da transação
                     jsonBody = new JSONObject();
                     jsonBody.put("api_key", apiKey);
                     jsonBody.put("card_id", cardId);
                     jsonBody.put("amount", amount);
+                    jsonBody.put("plan_id", planId);
                     jsonBody.put("soft_descriptor", softDescriptor);
                     jsonBody.put("metadata", metadata);
                     jsonBody.put("split_rules", splitRules);

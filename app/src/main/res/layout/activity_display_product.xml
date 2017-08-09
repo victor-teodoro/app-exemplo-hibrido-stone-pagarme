@@ -55,7 +55,7 @@
         android:layout_y="437dp"
         android:background="#1d2675"
         android:radius="3dip"
-        android:text="Pagar com Cartão Tokenizado"
+        android:text="Compra Recorrente"
         android:textColor="#FFF"
         android:layout_above="@+id/pay_mpos_btn"
         android:layout_alignParentLeft="true"
