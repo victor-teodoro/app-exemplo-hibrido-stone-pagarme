@@ -243,8 +243,9 @@ public class TransactionActivity extends AppCompatActivity {
                         }
                     });
                     ArrayList<EmvApplication> l = new ArrayList<EmvApplication>();
-                    EmvApplication masterCredit = new EmvApplication(PaymentMethod.CreditCard, "master");
+                    EmvApplication masterCredit = new EmvApplication(PaymentMethod.CreditCard, "mastercard");
                     l.add(masterCredit);
+                    Log.d("Pagar.me", String.valueOf(amount));
                     mpos.payAmount(amount, null, PaymentMethod.CreditCard);
                 }
 

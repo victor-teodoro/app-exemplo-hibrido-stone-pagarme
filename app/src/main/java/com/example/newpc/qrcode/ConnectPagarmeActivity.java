@@ -138,7 +138,7 @@ public class ConnectPagarmeActivity extends AppCompatActivity implements OnItemC
                                 showSpinner();
                             }
                         });
-                        mpos.downloadEMVTablesToDevice(false);
+                        mpos.downloadEMVTablesToDevice(true);
                     } catch (Exception e) {
                         Log.d("Pagar.me", "Got error in initialization and table update " + e.getMessage());
                     }
