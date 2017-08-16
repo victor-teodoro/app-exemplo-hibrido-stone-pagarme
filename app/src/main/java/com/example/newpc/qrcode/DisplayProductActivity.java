@@ -92,7 +92,7 @@ public class DisplayProductActivity extends AppCompatActivity {
         // Resgata a URL do produto
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            productURL = extras.getString("product_url");
+            productURL = "https://solutions-api.herokuapp.com/flytour";
             macAddress = extras.getString("macAddress");
             isPagarme = extras.getBoolean("isPagarme");
         }
