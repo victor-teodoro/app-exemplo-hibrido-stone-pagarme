@@ -72,7 +72,6 @@ public class DisplayProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_product);
         payMposBtn = (Button) findViewById(R.id.pay_mpos_btn);
         payCardBtn = (Button) findViewById(R.id.pay_card_btn);
-        payOnCashier = (Button) findViewById(R.id.pay_on_cashier);
         product_image = (ImageView) findViewById(R.id.product_image);
         product_name = (TextView) findViewById(R.id.product_name);
         product_amount = (TextView) findViewById(R.id.product_amount);
