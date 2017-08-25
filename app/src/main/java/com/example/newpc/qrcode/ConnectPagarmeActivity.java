@@ -163,7 +163,7 @@ public class ConnectPagarmeActivity extends AppCompatActivity implements OnItemC
                     });
                     Log.d("Pagar.me", "Tables updated!");
                     mpos.close("Tabelas OK");
-                    Intent intent = new Intent(ConnectPagarmeActivity.this, DisplayProductActivity.class);
+                    Intent intent = new Intent(ConnectPagarmeActivity.this, MainActivity.class);
                     intent.putExtra("macAddress", macAddress);
                     intent.putExtra("isPagarme", true);
                     startActivity(intent);

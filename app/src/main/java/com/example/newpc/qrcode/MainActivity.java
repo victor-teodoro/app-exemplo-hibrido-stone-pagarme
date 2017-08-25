@@ -14,20 +14,53 @@ import stone.providers.DownloadTablesProvider;
 import stone.utils.GlobalInformations;
 
 public class MainActivity extends AppCompatActivity {
-    Button scan;
+    Button replenishment_btn, sales_screen_btn, nespressoTower;
     ImageView stoneLogo;
+
+    String macAddress;
+    boolean isPagarme;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        scan = (Button) findViewById(R.id.scan);
+        replenishment_btn = (Button) findViewById(R.id.replenishment_btn);
+        sales_screen_btn = (Button) findViewById(R.id.salesman_screen_btn);
+        nespressoTower = (Button) findViewById(R.id.nespresso_tower);
         stoneLogo = (ImageView) findViewById(R.id.stone_logo);
         stoneLogo.setScaleType(ImageView.ScaleType.FIT_XY);
-        scan.setOnClickListener(new View.OnClickListener() {
+
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            macAddress = extras.getString("macAddress");
+            isPagarme = extras.getBoolean("isPagarme");
+        }
+
+        replenishment_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent rIntent = new Intent(MainActivity.this, ReaderActivity.class);
+                Intent rIntent = new Intent(MainActivity.this, ReplenishmentActivity.class);
                 startActivity(rIntent);
+            }
+        });
+
+        sales_screen_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent rIntent = new Intent(MainActivity.this, CPFActivity.class);
+                startActivity(rIntent);
+            }
+        });
+
+        nespressoTower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Chama a activity que mostra o produto e passa a URL de onde pegar as infos
+                Intent intent = new Intent(MainActivity.this, DisplayProductActivity.class);
+                intent.putExtra("product_url", "https://solutions-api.herokuapp.com/nespresso");
+                intent.putExtra("macAddress", macAddress);
+                intent.putExtra("isPagarme", isPagarme);
+                startActivity(intent);
             }
         });
     }

@@ -14,7 +14,7 @@ import stone.providers.DownloadTablesProvider;
 import stone.utils.GlobalInformations;
 
 public class ConnectPinpadActivity extends AppCompatActivity {
-    Button connectPagarme, connectStone, payWithCard;
+    Button connectPagarme, salesmanScreenBtn;
     ImageView stoneLogo;
 
     @Override
@@ -22,12 +22,20 @@ public class ConnectPinpadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect_pinpad);
         connectPagarme = (Button) findViewById(R.id.connect_pagarme);
+        salesmanScreenBtn = (Button) findViewById(R.id.salesman_screen_btn);
         stoneLogo = (ImageView) findViewById(R.id.stone_logo);
         stoneLogo.setScaleType(ImageView.ScaleType.FIT_XY);
         connectPagarme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent rIntent = new Intent(ConnectPinpadActivity.this, ConnectPagarmeActivity.class);
+                startActivity(rIntent);
+            }
+        });
+        salesmanScreenBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent rIntent = new Intent(ConnectPinpadActivity.this, SalesmanScreenActivity.class);
                 startActivity(rIntent);
             }
         });

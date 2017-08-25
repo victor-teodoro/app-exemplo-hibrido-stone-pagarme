@@ -71,13 +71,11 @@ public class DisplayProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_product);
         payMposBtn = (Button) findViewById(R.id.pay_mpos_btn);
-        payCardBtn = (Button) findViewById(R.id.pay_card_btn);
         product_image = (ImageView) findViewById(R.id.product_image);
         product_name = (TextView) findViewById(R.id.product_name);
         product_amount = (TextView) findViewById(R.id.product_amount);
         spinner = (ProgressBar) findViewById(R.id.progress_bar);
         spinner.setVisibility(View.GONE);
-        final Activity thisActivity = this;
 
         // Permitir fazer GET na thread principal
         int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -91,61 +89,13 @@ public class DisplayProductActivity extends AppCompatActivity {
         // Resgata a URL do produto
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            productURL = "https://solutions-api.herokuapp.com/flytour";
+            productURL = extras.getString("product_url");
             macAddress = extras.getString("macAddress");
             isPagarme = extras.getBoolean("isPagarme");
         }
 
         // Baixa as infos do produto
         getAPI(productURL);
-
-        // Paga no caixa
-        payOnCashier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(DisplayProductActivity.this, "Compra registrada com sucesso!\nDirija-se ao caixa mais próximo.", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // Paga com cartão tokenizado
-        payCardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showSpinner();
-                        }
-                    });
-
-                    // Resgata os parâmetros enviados pela API de Soluções
-                    JSONArray splitRules = productInfo.getJSONArray("split_rules");
-                    JSONObject metadata = productInfo.getJSONObject("metadata");
-                    String apiKey = productInfo.getString("api_key");
-                    String softDescriptor = productInfo.getString("soft_descriptor");
-                    String planId = productInfo.getString("plan_id");
-                    JSONObject customer = productInfo.getJSONObject("customer");
-                    Log.d("Pagar.me", planId);
-
-                    // Inicializa o JSON da transação
-                    jsonBody = new JSONObject();
-                    jsonBody.put("api_key", apiKey);
-                    jsonBody.put("card_id", cardId);
-                    jsonBody.put("amount", amount);
-                    jsonBody.put("plan_id", planId);
-                    jsonBody.put("customer", customer);
-                    jsonBody.put("soft_descriptor", softDescriptor);
-                    jsonBody.put("metadata", metadata);
-                    jsonBody.put("split_rules", splitRules);
-
-                    // Faz o POST no Pagar.me
-                    postApi();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         // Paga com MPOS
         payMposBtn.setOnClickListener(new View.OnClickListener() {

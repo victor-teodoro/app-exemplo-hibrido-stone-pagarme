@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.newpc.qrcode.MainActivity"
+    android:background="@drawable/nespresso_logo_upper">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Digite seu CPF"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:textColor="#FFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="106dp"
+        app:layout_constraintHorizontal_bias="0.517"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:ems="10"
+        android:text="98498355249"
+        android:textColor="#FFF"
+        android:inputType="text"
+        tools:layout_editor_absoluteY="193dp"
+        tools:layout_editor_absoluteX="85dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp" />
+
+    <Button
+        android:id="@+id/salesman_screen_btn"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:text="Abrir"
+        android:background="#dbaa72"
+        android:textColor="#FFF"
+        tools:layout_editor_absoluteY="447dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

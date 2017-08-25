@@ -275,7 +275,7 @@ public class TransactionActivity extends AppCompatActivity {
                         }
                     });
                     Log.d("Pagar.me", "Finished transaction");
-                    mpos.close("TRANS. APROVADA");
+                    mpos.close("WHAT ELSE?");
                     finish();
                 }
 
@@ -292,8 +292,6 @@ public class TransactionActivity extends AppCompatActivity {
 
                     try {
                         // Resgata os parâmetros enviados pela API de Soluções
-                        JSONArray splitRules = productInfo.getJSONArray("split_rules");
-                        JSONObject metadata = productInfo.getJSONObject("metadata");
                         String apiKey = productInfo.getString("api_key");
                         String softDescriptor = productInfo.getString("soft_descriptor");
 
@@ -304,13 +302,12 @@ public class TransactionActivity extends AppCompatActivity {
                         jsonBody.put("amount", amount);
                         jsonBody.put("installments", instalmentsSpinner.getSelectedItemPosition());
                         jsonBody.put("soft_descriptor", softDescriptor);
-                        jsonBody.put("metadata", metadata);
-                        jsonBody.put("split_rules", splitRules);
 
                         Log.d("Pagar.me", jsonBody.toString());
 
                         // Faz o POST no Pagar.me
-                        postApiMpos(mpos);
+                        //postApiMpos(mpos);
+                        mpos.finishTransaction(true, 0000, "000000000.0000");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

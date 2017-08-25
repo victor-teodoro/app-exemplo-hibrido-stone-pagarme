@@ -12,14 +12,34 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/flytour_logo"/>
+        android:src="@drawable/nespresso_logo"/>
     <Button
-        android:id="@+id/scan"
+        android:id="@+id/replenishment_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Adicionar Produto"
-        android:background="#1d2675"
+        android:text="Reposição de cápsulas"
+        android:background="#dbaa72"
         android:textColor="#FFF"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/salesman_screen_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="App do consultor"
+        android:background="#dbaa72"
+        android:textColor="#FFF"
+        android:layout_above="@+id/replenishment_btn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:id="@+id/nespresso_tower"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Nespresso Tower"
+        android:background="#dbaa72"
+        android:textColor="#FFF"
+        android:layout_above="@+id/salesman_screen_btn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

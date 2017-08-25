@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/panvel_logo" />
+        android:src="@drawable/nespresso_logo" />
 
 </RelativeLayout>
 

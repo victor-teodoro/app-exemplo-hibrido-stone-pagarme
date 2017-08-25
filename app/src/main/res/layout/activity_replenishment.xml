@@ -12,25 +12,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/nespresso_logo"/>
+        android:src="@drawable/tela_inicial_nespresso"/>
     <Button
-        android:id="@+id/connect_pagarme"
+        android:id="@+id/replenishment_btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Conectar via Pagar.me"
+        android:text="Reposição de cápsulas"
         android:background="#dbaa72"
         android:textColor="#FFF"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-    <Button
-        android:id="@+id/salesman_screen_btn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Ir para a tela do vendedor"
-        android:background="#dbaa72"
-        android:textColor="#FFF"
-        android:layout_above="@+id/connect_pagarme"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
