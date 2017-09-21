@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.newpc.qrcode.MainActivity"
-    android:background="@drawable/nespresso_logo_upper">
+    android:background="@drawable/carrinho_ambev">
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Digite seu CPF"
+        android:text="Digite seu CPF/CNPJ"
         android:textStyle="bold"
         android:textSize="22dp"
         android:textColor="#FFF"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:ems="10"
-        android:text="98498355249"
+        android:text="984.983.552-49"
         android:textColor="#FFF"
         android:inputType="text"
         tools:layout_editor_absoluteY="193dp"

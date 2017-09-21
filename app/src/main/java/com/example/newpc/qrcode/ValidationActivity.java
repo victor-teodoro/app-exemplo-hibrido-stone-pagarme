@@ -79,7 +79,8 @@ public class ValidationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Erro na ativacao do aplicativo, verifique a lista de erros do provider", Toast.LENGTH_SHORT).show();
                     /* Chame o metodo abaixo para verificar a lista de erros. Para mais detalhes, leia a documentacao: */
                     Log.e("Stone", "onError: " + activeApplicationProvider.getListOfErrors().toString());
-
+                    Intent mainIntent = new Intent(ValidationActivity.this, CPFActivity.class);
+                    startActivity(mainIntent);
                 }
             });
             activeApplicationProvider.execute();
@@ -120,7 +121,7 @@ public class ValidationActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 // habilita o modo desenvolvedor
-                Intent mainIntent = new Intent(ValidationActivity.this, ConnectPinpadActivity.class);
+                Intent mainIntent = new Intent(ValidationActivity.this, SalesmanScreenActivity.class);
                 startActivity(mainIntent);
             }
         }, SPLASH_DISPLAY_LENGTH);

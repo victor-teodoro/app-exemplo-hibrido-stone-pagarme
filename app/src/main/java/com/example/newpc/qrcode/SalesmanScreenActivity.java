@@ -1,12 +1,16 @@
 package com.example.newpc.qrcode;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,114 +41,71 @@ import stone.utils.GlobalInformations;
 
 public class SalesmanScreenActivity extends AppCompatActivity {
     Button payWithCard;
+    TextView qtde1, qtde2, qtde3;
+    private ProgressBar spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salesman_screen);
 
-        payWithCard = (Button) (Button) findViewById(R.id.pay_card_btn);
+        qtde1 = (TextView) findViewById(R.id.qtde1);
+        qtde1.setText("10");
+        qtde2 = (TextView) findViewById(R.id.qtde2);
+        qtde2.setText("10");
+        qtde3 = (TextView) findViewById(R.id.qtde3);
+        qtde3.setText("10");
+        calcValorFinal();
+
+        // Salva o spinner e pinta de branco
+        spinner = (ProgressBar) findViewById(R.id.progress_bar);
+        spinner.setVisibility(View.GONE);
+
+        payWithCard = (Button) (Button) findViewById(R.id.pay_with_gf);
         payWithCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject order = getOrder();
-                mundipaggOrder(order);
+                JSONObject request = new JSONObject();
+                int amount = calcValorInt();
+                try {
+                    request.put("amount", amount);
+                    request.put("date", "2017-09-29");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.d("Request Enviada", request.toString());
+                sendToGF(request);
             }
         });
     }
 
-    private JSONArray getItems() {
-        // Cria e popula a lista de itens no pedido
-        JSONObject item = new JSONObject();
-        JSONArray items = new JSONArray();
-        try {
-            // Item 1
-            item.put("amount", 190);
-            item.put("description", "Livanto");
-            TextView text1 = (TextView) findViewById(R.id.qtde1);
-            item.put("quantity", Integer.valueOf(text1.getText().toString()));
-            items.put(0, item);
-
-            // Item 2
-            item.put("amount", 190);
-            item.put("description", "Voluto");
-            TextView text2 = (TextView) findViewById(R.id.qtde2);
-            item.put("quantity", Integer.valueOf(text2.getText().toString()));
-            items.put(1, item);
-
-            // Item 3
-            item.put("amount", 190);
-            item.put("description", "Cosi");
-            TextView text3 = (TextView) findViewById(R.id.qtde3);
-            item.put("quantity", Integer.valueOf(text3.getText().toString()));
-            items.put(2, item);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return items;
-    }
-
-    private JSONObject getCustomer() {
-        // Cria e popula os dados do customer
-        JSONObject customer = new JSONObject();
-        try {
-            customer.put("email", "vteodoro@stone.com.br");
-            customer.put("name", "Victor Teodoro");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return customer;
-    }
-
-    private JSONArray getPayments() {
-        // Cria e popula os pagamentos
-        JSONArray payments = new JSONArray();
-        JSONObject payment = new JSONObject();
-        JSONObject creditCard = new JSONObject();
-        try {
-            payment.put("payment_method", "credit_card");
-            creditCard.put("card_id", "card_5Z8AnBVsOh5nGWey");
-            payment.put("credit_card", creditCard);
-            payments.put(0, payment);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return payments;
-    }
-
-    private JSONObject getOrder() {
-        //Cria e popula o objeto order
-        JSONArray items = getItems();
-        JSONObject customer = getCustomer();
-        JSONArray payments = getPayments();
-        JSONObject order = new JSONObject();
-        try {
-            order.put("items", items);
-            order.put("customer", customer);
-            order.put("payments", payments);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return order;
-    }
-
-    private void mundipaggOrder(JSONObject order) {
+    private void sendToGF(JSONObject request) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showSpinner();
+            }
+        });
         updateAndroidSecurityProvider();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String uri = "https://api.mundipagg.com/core/v1/orders";
+        String uri = "https://solutions-api.herokuapp.com/garantia_fornecedor";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST, uri, order,
+                Request.Method.POST, uri, request,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("MundiSuccess", response.toString());
-                        Toast.makeText(getApplicationContext(), "Transação Bem-sucedida", Toast.LENGTH_SHORT).show();
-                        Intent rIntent = new Intent(SalesmanScreenActivity.this, MainActivity.class);
+                        Log.d("GarantiaSuccess", response.toString());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideSpinner();
+                            }
+                        });
+                        Toast.makeText(getApplicationContext(), "Operação Bem-sucedida", Toast.LENGTH_SHORT).show();
+                        Intent rIntent = new Intent(SalesmanScreenActivity.this, ReaderActivity.class);
+                        rIntent.putExtra("payments", response.toString());
                         startActivity(rIntent);
                     }
                 }, new Response.ErrorListener() {
@@ -184,7 +145,7 @@ public class SalesmanScreenActivity extends AppCompatActivity {
             int cont = Integer.valueOf(text1.getText().toString());
             cont += 10;
             text1.setText(String.valueOf(cont));
-            calcValorFinal(view);
+            calcValorFinal();
         }
 
         if (view.getId() == R.id.button5) {
@@ -192,7 +153,7 @@ public class SalesmanScreenActivity extends AppCompatActivity {
             int cont = Integer.valueOf(text2.getText().toString());
             cont += 10;
             text2.setText(String.valueOf(cont));
-            calcValorFinal(view);
+            calcValorFinal();
         }
 
         if (view.getId() == R.id.button7) {
@@ -200,7 +161,7 @@ public class SalesmanScreenActivity extends AppCompatActivity {
             int cont = Integer.valueOf(text3.getText().toString());
             cont += 10;
             text3.setText(String.valueOf(cont));
-            calcValorFinal(view);
+            calcValorFinal();
         }
     }
 
@@ -211,7 +172,7 @@ public class SalesmanScreenActivity extends AppCompatActivity {
             cont -= 10;
             if (cont < 0) cont = 0;
             text1.setText(String.valueOf(cont));
-            calcValorFinal(view);
+            calcValorFinal();
         }
         if (view.getId() == R.id.button6) {
             TextView text2 = (TextView) findViewById(R.id.qtde2);
@@ -219,7 +180,7 @@ public class SalesmanScreenActivity extends AppCompatActivity {
             cont -= 10;
             if (cont < 0) cont = 0;
             text2.setText(String.valueOf(cont));
-            calcValorFinal(view);
+            calcValorFinal();
         }
         if (view.getId() == R.id.button8) {
             TextView text3 = (TextView) findViewById(R.id.qtde3);
@@ -227,19 +188,27 @@ public class SalesmanScreenActivity extends AppCompatActivity {
             cont -= 10;
             if (cont < 0) cont = 0;
             text3.setText(String.valueOf(cont));
-            calcValorFinal(view);
+            calcValorFinal();
         }
     }
 
-    public void calcValorFinal(View View) {
+    public void calcValorFinal() {
         TextView valorFinal = (TextView) findViewById(R.id.valorFinal);
         TextView text1 = (TextView) findViewById(R.id.qtde1);
         TextView text2 = (TextView) findViewById(R.id.qtde2);
         TextView text3 = (TextView) findViewById(R.id.qtde3);
-        double val = Integer.valueOf(text1.getText().toString()) * 1.90 + Integer.valueOf(text2.getText().toString()) * 1.90 + Integer.valueOf(text3.getText().toString()) * 1.90;
+        double val = Integer.valueOf(text1.getText().toString()) * 24.30 + Integer.valueOf(text2.getText().toString()) * 25.60 + Integer.valueOf(text3.getText().toString()) * 29.90;
         // Mostra o valor formatado pra reais
         NumberFormat realFormat = NumberFormat.getCurrencyInstance();
         valorFinal.setText(realFormat.format(val));
+    }
+
+    public int calcValorInt() {
+        TextView text1 = (TextView) findViewById(R.id.qtde1);
+        TextView text2 = (TextView) findViewById(R.id.qtde2);
+        TextView text3 = (TextView) findViewById(R.id.qtde3);
+        int amount = (int) ((Integer.valueOf(text1.getText().toString()) * 24.30 + Integer.valueOf(text2.getText().toString()) * 25.60 + Integer.valueOf(text3.getText().toString()) * 29.90) * 100);
+        return amount;
     }
 
     private void updateAndroidSecurityProvider() {
@@ -250,5 +219,12 @@ public class SalesmanScreenActivity extends AppCompatActivity {
         } catch (GooglePlayServicesNotAvailableException e) {
             Log.e("SecurityException", "Google Play Services not available.");
         }
+    }
+
+    public void showSpinner() {
+        spinner.setVisibility(View.VISIBLE);
+    }
+    public void hideSpinner() {
+        spinner.setVisibility(View.GONE);
     }
 }

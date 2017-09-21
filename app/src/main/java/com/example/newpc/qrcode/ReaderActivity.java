@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,9 +23,7 @@ import java.net.URL;
 
 public class ReaderActivity extends AppCompatActivity {
     private Button scan_btn;
-    JSONObject productInfo;
-    String macAddress = null;
-    boolean isPagarme = false;
+    String payments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +34,7 @@ public class ReaderActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            macAddress = extras.getString("macAddress");
-            isPagarme = extras.getBoolean("isPagarme");
+            payments = extras.getString("payments");
         }
 
 
@@ -66,9 +64,7 @@ public class ReaderActivity extends AppCompatActivity {
 
                 // Chama a activity que mostra o produto e passa a URL de onde pegar as infos
                 Intent intent = new Intent(this, DisplayProductActivity.class);
-                intent.putExtra("product_url", result.getContents());
-                intent.putExtra("macAddress", macAddress);
-                intent.putExtra("isPagarme", isPagarme);
+                intent.putExtra("payments", payments);
                 startActivity(intent);
             }
         }
