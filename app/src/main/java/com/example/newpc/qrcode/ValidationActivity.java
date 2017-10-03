@@ -79,7 +79,7 @@ public class ValidationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Erro na ativacao do aplicativo, verifique a lista de erros do provider", Toast.LENGTH_SHORT).show();
                     /* Chame o metodo abaixo para verificar a lista de erros. Para mais detalhes, leia a documentacao: */
                     Log.e("Stone", "onError: " + activeApplicationProvider.getListOfErrors().toString());
-
+                    continueApplication();
                 }
             });
             activeApplicationProvider.execute();
