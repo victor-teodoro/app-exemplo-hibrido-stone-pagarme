@@ -34,15 +34,10 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import stone.application.interfaces.StoneCallbackInterface;
-import stone.cache.ApplicationCache;
-import stone.providers.DownloadTablesProvider;
-import stone.utils.GlobalInformations;
-
 public class SalesmanScreenActivity extends AppCompatActivity {
     Button payWithCard;
     TextView qtde1, qtde2, qtde3;
-    private ProgressBar spinner;
+    //private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +53,8 @@ public class SalesmanScreenActivity extends AppCompatActivity {
         calcValorFinal();
 
         // Salva o spinner e pinta de branco
-        spinner = (ProgressBar) findViewById(R.id.progress_bar);
-        spinner.setVisibility(View.GONE);
+        //spinner = (ProgressBar) findViewById(R.id.progress_bar);
+        //spinner.setVisibility(View.GONE);
 
         payWithCard = (Button) (Button) findViewById(R.id.pay_with_gf);
         payWithCard.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +63,7 @@ public class SalesmanScreenActivity extends AppCompatActivity {
                 JSONObject request = new JSONObject();
                 int amount = calcValorInt();
                 try {
-                    request.put("amount", amount);
-                    request.put("date", "2017-09-29");
+                    request.put("source", "app");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -80,16 +74,16 @@ public class SalesmanScreenActivity extends AppCompatActivity {
     }
 
     private void sendToGF(JSONObject request) {
-        runOnUiThread(new Runnable() {
+        /*runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 showSpinner();
             }
-        });
+        });*/
         updateAndroidSecurityProvider();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String uri = "https://solutions-api.herokuapp.com/garantia_fornecedor";
+        String uri = "https://solutions-api.herokuapp.com/garantia_handshake";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST, uri, request,
@@ -97,14 +91,14 @@ public class SalesmanScreenActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("GarantiaSuccess", response.toString());
-                        runOnUiThread(new Runnable() {
+                        /*runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 hideSpinner();
                             }
-                        });
+                        });*/
                         Toast.makeText(getApplicationContext(), "Operação Bem-sucedida", Toast.LENGTH_SHORT).show();
-                        Intent rIntent = new Intent(SalesmanScreenActivity.this, ReaderActivity.class);
+                        Intent rIntent = new Intent(SalesmanScreenActivity.this, DisplayProductActivity.class);
                         rIntent.putExtra("payments", response.toString());
                         startActivity(rIntent);
                     }
@@ -221,10 +215,10 @@ public class SalesmanScreenActivity extends AppCompatActivity {
         }
     }
 
-    public void showSpinner() {
+    /*public void showSpinner() {
         spinner.setVisibility(View.VISIBLE);
     }
     public void hideSpinner() {
         spinner.setVisibility(View.GONE);
-    }
+    }*/
 }

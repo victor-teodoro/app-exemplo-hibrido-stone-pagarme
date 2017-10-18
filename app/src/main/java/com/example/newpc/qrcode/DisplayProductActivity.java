@@ -40,61 +40,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import me.pagar.mposandroid.EmvApplication;
-import me.pagar.mposandroid.Mpos;
-import me.pagar.mposandroid.MposListener;
-import me.pagar.mposandroid.MposPaymentResult;
-import me.pagar.mposandroid.PaymentMethod;
-
-import static com.example.newpc.qrcode.R.id.view;
-
 public class DisplayProductActivity extends AppCompatActivity {
     ListView paymentsList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_product);
-
-        // Popula a lista de pagamentos
-        Bundle extras = getIntent().getExtras();
-        JSONArray payments = null;
-        try {
-            JSONObject paymentsObject = new JSONObject(extras.getString("payments"));
-            payments = (JSONArray) paymentsObject.get("payments");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        ArrayList paymentsArray = new ArrayList<String>();
-        for (int i = 0; i < payments.length(); i++) {
-            JSONObject payment = null;
-            int amount = 0;
-            String date = "";
-            try {
-                payment = (JSONObject) payments.get(i);
-                amount = (int) payment.get("amount");
-                String jsDate = (String) payment.get("day");
-                date = (String) jsDate.subSequence(8, 10) + "/" + jsDate.subSequence(5, 7) + "/" + jsDate.subSequence(0, 4);
-                Log.d("String", date);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            NumberFormat realFormat = NumberFormat.getCurrencyInstance();
-            paymentsArray.add("Valor: " + realFormat.format(amount/100.0) + "\t" + "Dia: " + date);
-        }
-
-        paymentsList = (ListView) findViewById(R.id.payment_list);
-        // Create The Adapter with passing ArrayList as 3rd parameter
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, paymentsArray);
-        // Set The Adapter
-        paymentsList.setAdapter(arrayAdapter);
-
-        // Permitir fazer GET na thread principal
-        int SDK_INT = android.os.Build.VERSION.SDK_INT;
-        if (SDK_INT > 8) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                    .permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
     }
 }

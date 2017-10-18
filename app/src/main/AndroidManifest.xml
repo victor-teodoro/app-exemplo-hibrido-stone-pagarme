@@ -19,32 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DisplayProductActivity" />
-        <activity android:name=".DevicesActivity" />
-        <activity android:name=".ConnectPinpadActivity" />
-        <activity android:name=".ConnectPagarmeActivity" />
-        <activity android:name=".ConnectStoneActivity" />
-        <activity android:name=".TransactionActivity" />
-        <activity android:name=".ReaderActivity" />
-        <activity android:name=".ValidationActivity">
+        <activity android:name=".SalesmanScreenActivity"></activity>
+        <activity android:name=".CPFActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReplenishmentActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"></category>
-                <data android:scheme="http"
-                    android:host="www.nespresso.com.br"
-                    android:pathPrefix="/replenish" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SalesmanScreenActivity"></activity>
-        <activity android:name=".CPFActivity"></activity>
     </application>
 
 </manifest>

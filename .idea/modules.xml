@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/QRCode.iml" filepath="$PROJECT_DIR$/QRCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-exemplo-hibrido-stone-pagarme.iml" filepath="$PROJECT_DIR$/app-exemplo-hibrido-stone-pagarme.iml" />
       <module fileurl="file://$PROJECT_DIR$/fplib-release/fplib-release.iml" filepath="$PROJECT_DIR$/fplib-release/fplib-release.iml" />
       <module fileurl="file://$PROJECT_DIR$/mpos-android/mpos-android.iml" filepath="$PROJECT_DIR$/mpos-android/mpos-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/mpos-android-native/mpos-android-native.iml" filepath="$PROJECT_DIR$/mpos-android-native/mpos-android-native.iml" />

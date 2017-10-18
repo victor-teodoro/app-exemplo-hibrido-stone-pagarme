@@ -11,16 +11,17 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/carrinho_ambev" />
+        android:src="@drawable/validation_ambev" />
 
-    <ListView
-        android:id="@+id/payment_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFF"
-        android:layout_marginTop="95dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verifique no POS do Parceiro!"
+        android:textStyle="bold"
+        android:textSize="28dp"
+        android:textColor="#FFF"
+        android:layout_marginTop="102dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
-    </ListView>
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
